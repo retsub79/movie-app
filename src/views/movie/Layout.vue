@@ -1,22 +1,22 @@
 <script setup>
-import EventService from "@/services/EventService.js";
+import MovieService from "@/services/MovieService.js";
 import { computed, onMounted, ref } from "vue";
 import router from "../../router";
 
 const props = defineProps(["id"]);
 
-const event = ref("");
+const movie = ref("");
 const id = computed(() => props.id);
 onMounted(() => {
-  EventService.getEvent(id.value)
+  MovieService.getMovie(id.value)
     .then((response) => {
-      event.value = response.data;
+      movie.value = response.data;
     })
     .catch((error) => {
         if (error.response && error.response.status == 404) {
         router.push({
           name: '404Resource',
-          params: { resource: 'event' }
+          params: { resource: 'movie' }
         })
       } else {
         router.push({ name: 'NetworkError' })
@@ -26,21 +26,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="event">
-    <h1>{{ event.title }}</h1>
+  <div v-if="movie">
+    <h1>{{ movie.title }}</h1>
     <div id="nav">
-      <router-link :to="{ name: 'EventDetails' }"
+      <router-link :to="{ name: 'MovieDetails' }"
         >Details</router-link
       >
       |
-      <router-link :to="{ name: 'EventRegister' }"
+      <router-link :to="{ name: 'MovieRegister' }"
         >Register</router-link
       >
       |
-      <router-link :to="{ name: 'EventEdit' }"
+      <router-link :to="{ name: 'MovieEdit' }"
         >Edit</router-link
       >
     </div>
-    <router-view :event="event" />
+    <router-view :movie="movie" />
   </div>
 </template>

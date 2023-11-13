@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  event: {
+  movie: {
     type: Object,
     required: true,
   },
@@ -9,18 +9,19 @@ defineProps({
 
 <template>
   <router-link
-    class="event-link"
-    :to="{ name: 'EventDetails', params: { id: event.id } }"
+    class="movie-link"
+    :to="{ name: 'MovieDetails', params: { id: movie.id } }"
   >
-    <div class="event-card">
-      <h2>{{ event.title }}</h2>
-      <span>@{{ event.time }} on {{ event.date }}</span>
+    <div class="movie-card">
+      <h2>{{ movie.Title }}</h2>
+      <span>{{ movie.Director }}</span>
+      <img v-bind:src="movie.Poster" alt="">
     </div>
   </router-link>
 </template>
 
 <style scoped>
-.event-card {
+.movie-card {
   padding: 20px;
   width: 250px;
   cursor: pointer;
@@ -28,12 +29,12 @@ defineProps({
   margin-bottom: 18px;
 }
 
-.event-card:hover {
+.movie-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
 }
 
-.event-link {
+.movie-link {
   color: #2c3e50;
   text-decoration: none;
 }

@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import EventList from "@/views/EventList.vue";
-import EventLayout from "@/views/event/Layout.vue";
-import EventDetails from "@/views/event/Details.vue";
-import EventRegister from "@/views/event/Register.vue";
-import EventEdit from "@/views/event/Edit.vue";
+import MovieList from "@/views/MovieList.vue";
+import MovieLayout from "@/views/movie/Layout.vue";
+import MovieDetails from "@/views/movie/Details.vue";
+import MovieRegister from "@/views/movue/Register.vue";
+import MovieEdit from "@/views/movie/Edit.vue";
 import About from "@/views/About.vue";
 import NotFound from "@/views/NotFound.vue";
 import NetworkError from "@/views/NetworkError.vue";
@@ -11,37 +11,37 @@ import NetworkError from "@/views/NetworkError.vue";
 const routes = [
   {
     path: "/",
-    name: "EventList",
-    component: EventList,
+    name: "MovieList",
+    component: MovieList,
     props: route => ({ page: parseInt(route.query.page)  || 1 })
   },
   {
-    path: "/events/:id",
-    name: "EventLayout",
+    path: "/movies/:id",
+    name: "MovieLayout",
     props: true,
-    component: EventLayout,
+    component: MovieLayout,
     children: [
       {
         path: "",
-        name: "EventDetails",
-        component: EventDetails,
+        name: "MovieDetails",
+        component: MovieDetails,
       },
       {
         path: "register",
-        name: "EventRegister",
-        component: EventRegister,
+        name: "MovieRegister",
+        component: MovieRegister,
       },
       {
         path: "edit",
-        name: "EventEdit",
-        component: EventEdit,
+        name: "MovieEdit",
+        component: MovieEdit,
       },
     ]
   },
   {
-    path: '/event/:afterEvent(.*)',
+    path: '/movie/:afterEvent(.*)',
     redirect: to => {
-      return { path: '/events/' + to.params.afterEvent }
+      return { path: '/movies/' + to.params.afterEvent }
     }
   },
   {
